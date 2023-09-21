@@ -1,7 +1,9 @@
-import React from "react";
+// Когда пишем старт вебпак собирает весь проект и запускает локально на компе на локалхосте. Вебпак запускает весь проект собирает все файлы и запускает бабель преобразовывает все файлы на джс файлы.
+
+// Функция имеет право обратиться за пределами функции это называется замыкание.
+
 import { useState } from "react";
 import { v1 } from "uuid";
-// import logo from "./logo.svg";
 import "./App.css";
 
 import { TaskType, TodoList } from "./TodoList";
@@ -30,6 +32,14 @@ function App() {
     setTasks(newTasks);
   }
 
+  function changeStatus(taskId: string, isDone: boolean) {
+    let task = dataTasks.find((t) => t.id === taskId);
+    if (task) {
+      task.isDone = isDone;
+    }
+    setTasks([...dataTasks]);
+  }
+
   function changeFilter(value: FilterValuesType) {
     setFilter(value);
   }
@@ -52,6 +62,8 @@ function App() {
         removeTask={removeTask}
         changeFilter={changeFilter}
         addTask={addTask}
+        changeStatus={changeStatus}
+        filter={filter}
       />
     </div>
   );
